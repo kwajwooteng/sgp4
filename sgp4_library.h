@@ -1,7 +1,8 @@
 #pragma once
 
-#ifndef sgp_library_h
-#define sgp_library_h
+#ifndef sgp4_library_h
+#define sgp4_library_h
+
 
 #define M_PI 3.14159265358979
 #define TWO_M_PI 6.28318530717958

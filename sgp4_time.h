@@ -14,21 +14,25 @@
 #define secday 86400.0
 #define omega_E 1.00273790934
 #define omega_ER omega_E*TWO_M_PI;
+#define M_PI 3.14159265358979
+#define TWO_M_PI 6.28318530717958
 
-struct time_step
+struct
+time_step
 	{	
-		int yr;
-		int mo;
-		int dy;
-		int hr;
-		int mi;
-		int se;
-		int hu;
+		double yr;
+		double mo;
+		double dy;
+		double hr;
+		double mi;
+		double se;
+		double hu;
 	};
 
 typedef time_step time_step;
 
-class sgp4_time
+class 
+sgp4_time
 {
 	private:
 
@@ -36,29 +40,34 @@ class sgp4_time
 	
 	public:
 
+		sgp4_time();
+
 		// user defined types
 		typedef char			date[11];
 		typedef unsigned int	word;
 		typedef char			clock_time[12];
 		typedef unsigned char	BYTE;
 
-		double Julian_Date_of_Year(double& year);
-		double Julian_Date_of_Epoch(double& year);
-		double Epoch_Time(double& jd);
-		int DOY(int& yr, int& mo, int& dy);
-		double Fraction_of_Day(int& hr, int& mi, int& se, int& hu);
-		sgp4_time::date * Calendar_Date(double& jd, sgp4_time::BYTE& res);
-	    sgp4_time::clock_time * Time_of_Day(double& jd, bool& full, sgp4_time::BYTE& res);
-		double Julian_Dates(std::string& ts);
-		void getDateTime(double& jd, std::string& ts);
-		void getCheckDate(std::string& ts);
-		void getTimeToUTC(std::string& ts);
-		void getJdToUTC(double& jt);
-		void getTimeFromUTC(std::string& ts);
-		void getJDFromUTC(double& jt);
-		double ThetaG(double& epoch);
-		double ThetaG_JD(double& jd);
-		double Delta_ET(double& year);
+		bool DST;
+		int UTC_offset;
+		double sgp4_time::Julian_Date_of_Year(double& year);
+		double sgp4_time::Julian_Date_of_Epoch(double& year);
+		double sgp4_time::Epoch_Time(double& jd);
+		int sgp4_time::DOY(double& yr, double& mo, double& dy);
+		double sgp4_time::Fraction_of_Day(double& hr, double& mi, double& se, double& hu);
+		char *sgp4_time::Calendar_Date(double& jd, sgp4_time::BYTE& res);
+	    char *sgp4_time::Time_of_Day(double& jd, bool& full, sgp4_time::BYTE& res);
+		double sgp4_time::Julian_Date(time_step& ts);
+		void sgp4_time::setDateTime(double& jd, time_step& ts);
+		void sgp4_time::setCheckDate(time_step& ts);
+		void sgp4_time::setTimeToUTC(time_step& ts);
+		void sgp4_time::setJdToUTC(double& jt);
+		void sgp4_time::setTimeFromUTC(time_step& ts);
+		void sgp4_time::setJDFromUTC(double& jt);
+		double sgp4_time::ThetaG(double& epoch);
+		double sgp4_time::ThetaG_JD(double& jd);
+		double sgp4_time::Delta_ET(double& year);
+		char sgp4_time::TwoDigit(double& dayofweekdig);
 
 };
 
